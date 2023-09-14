@@ -6,7 +6,7 @@ export default function Disliked() {
     //Fetching API DATA
     useEffect(()=>{
         axios
-        .get("http://127.0.0.1:3003/posts")
+        .get("http://localhost:3005/api/posts")
         .then((res)=>{
             let postData = res.data
            postData = postData.filter((post)=>post.liked == false && post.disliked == true) // As Per db.json (true and false)
@@ -40,7 +40,7 @@ export default function Disliked() {
               // posts && is used here for conditional rendering
               posts.map((post, i) => (
                 <tr key={i}>
-                  <td>{post.id}</td>
+                  <td>{post._id}</td>
                   <td>{post.title}</td>
                   <td>{post.body}</td>
                 </tr>

@@ -6,7 +6,7 @@ import { useParams } from 'react-router-dom'
     // When we load the page useEffect uske bad call hota isliye data aana chaiye to condition rendering krte hai {post? id} post hai to id show hogi
 
 export default function PostDetails() {
-    const {id} = useParams()       //Distucture kr liya we need only id type (Data get using useParams)
+    const {_id} = useParams()       //Distucture kr liya we need only id type (Data get using useParams)
     const [post, setpost] = useState() //we useing post only for single data
     // console.log(id)
 
@@ -14,10 +14,10 @@ export default function PostDetails() {
     //Note compoenent render hone ke bad useEffect work krna ha
     useEffect(()=>{
         axios
-        .get(`http://127.0.0.1:3003/posts/${id}`)
+        .get(`http://localhost:3005/api/posts/${_id}`)
         .then((res)=>setpost(res.data))
         .catch(err=>console.log(err))
-    },[])
+    },[_id])
     // console.log(post)
 
   return (
@@ -30,7 +30,7 @@ export default function PostDetails() {
                 <tbody>
                     <tr>
                         <th>Id:</th>
-                        <th>{post?.id}</th> {/*Conditional rendering {post?*/}
+                        <th>{post?._id}</th> {/*Conditional rendering {post?*/}
                     </tr>
                     <tr>
                         <th>Title:</th>

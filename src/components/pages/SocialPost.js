@@ -12,7 +12,7 @@ export default function Posts() {
    // Fetching API Data in the Background using UseEffect Hook
   useEffect(() => {
     axios
-      .get("http://127.0.0.1:3003/posts")
+      .get("http://localhost:3005/api/posts")
       .then((res) => setposts(res.data))
       .catch((err) => console.log(err));
   }, []); // [] will work like ComponentDidMount() and runs only once
@@ -44,7 +44,7 @@ export default function Posts() {
             <tr key={i}>
               <td>
                 {/* All the post id now create as link */}
-                <Link to={`/social/${post.id}`}>{post.id}</Link> {/*post.id for display*/}
+                <Link to={`/social/${post._id}`}>{post._id}</Link> {/*post.id for display*/}
               </td>
               <td>{post.title}</td>          
             </tr>

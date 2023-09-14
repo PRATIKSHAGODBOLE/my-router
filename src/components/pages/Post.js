@@ -14,7 +14,7 @@ export default function SocialPostApp() {
   // Fetching API Data in the Background using UseEffect Hook
   useEffect(() => {
     axios
-      .get("http://127.0.0.1:3003/posts")
+      .get("http://localhost:3005/api/posts")
       .then((res) => setposts(res.data))
       .catch((err) => console.log(err));
   }, []); // [] will work like ComponentDidMount() and runs only once
@@ -35,7 +35,7 @@ export default function SocialPostApp() {
     // console.log(newPost)
     axios
       // Template String
-      .put(`http://127.0.0.1:3003/posts/${post.id}`, newPost)
+      .put(`http://localhost:3005/api/posts/${post._id}`, newPost)
       .then(res => {
         alert("Record Updated")
         setshowEditForm(false)
@@ -48,14 +48,15 @@ export default function SocialPostApp() {
     // console.log(postInfo)
     if (window.confirm("Are you sure to delete the Record")) {
       axios
-        .delete(`http://127.0.0.1:3003/posts/${postInfo.id}`)
+        .delete(`http://localhost:3005/api/posts/${postInfo._id}`)
         .then(res => alert("Record Deleted Successfully"))
         .catch(err => console.log(err))
 
       window.location.reload()
     }
-
   }
+
+  
   function showCreatePostForm() {
     setshowCreateForm(true)
   }
@@ -63,7 +64,7 @@ export default function SocialPostApp() {
   function CreateNewPost() {
     // console.log(newPost)
     axios
-      .post(`http://127.0.0.1:3003/posts`, newPost)
+      .post(`http://localhost:3005/api/posts`, newPost)
       .then(res => alert("New Post Created"))
       .catch(err => console.log(err))
 
@@ -105,7 +106,7 @@ export default function SocialPostApp() {
       {showEditForm ?
         <form>
           <label htmlFor="">ID</label>
-          <input type="text" defaultValue={post.id} className="form-control"
+          <input type="text" defaultValue={post._id} className="form-control"
             onChange={(e) => setnewPost({ ...newPost, id: e.target.value })}
           />
 
@@ -135,7 +136,7 @@ export default function SocialPostApp() {
               // posts && is used here for conditional rendering
               posts.map((post, i) => (
                 <tr key={i}>
-                  <td>{post.id}</td>
+                  <td>{post._id}</td>
                   <td>{post.title}</td>
                   <td>{post.body}</td>
                   <td>

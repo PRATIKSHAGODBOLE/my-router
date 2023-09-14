@@ -11,14 +11,14 @@ export default function AddNewPost() {
      body: '', 
      latest:true, 
      oldest:false, 
-    //  liked:false, 
-    //  disliked:true,
+     liked:false, 
+     disliked:false,
   })
 
   function  CreateNewPost (){
     // post use for creating new data
     axios
-      .post(`http://127.0.0.1:3003/posts`, newPost)
+      .post(`http://localhost:3005/api/posts`, newPost)
        .then(res => alert("New Post Created") )
       .catch(err => console.log(err))
 
